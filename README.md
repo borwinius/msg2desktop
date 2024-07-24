@@ -2,7 +2,7 @@
 a little helperrole for ansible to send short messages to users there are graphical logged in with ansible.
 
 ## Installation
-- download the code
+- download the code with : `git clone https://github.com/borwinius/msg2desktop.git`
 - copy the code in your ansible roles-directory
 - make 3 Environmentvariables in ansible like this:
 ```
@@ -11,10 +11,21 @@ a little helperrole for ansible to send short messages to users there are graphi
 "msg_duration": "5000"
 ```
 be patient with the hicommas and commas.  
-test it with ansible  
+
+## test it with ansible  
+include it in your own rolefile `role/MYROLE/tasks/main.yaml`  
+```
+- include_role:
+     name: helper/msg2desktop
+  when:
+     - msg_title is defined
+     - msg_msg is defined
+     - msg_duration is defined
+```
 an Examplemessage:  
   
 ![examplemessage](example.png)  
   
 manual test with:  
 `./msg2desktop.sh -t 'my test' -m 'my message' -d 5000`
+
