@@ -29,3 +29,5 @@ an Examplemessage:
 manual test with:  
 `./msg2desktop.sh -t 'my test' -m 'my message' -d 5000`
 
+- checked only with KDE and GNOME
+- this module will send the message to all loggedin users of a machine.
