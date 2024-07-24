@@ -1,1 +1,28 @@
-#test
+---
+### sende eine Desktopnachricht an angemeldete Benutzer
+
+- name: "copy msg2desktop.sh"
+  template:
+    src: msg2desktop.sh
+    dest: /tmp/msg2desktop.sh
+
+- name: "change permissions to x"
+  file:
+    path: /tmp/msg2desktop.sh
+    state: touch
+    mode: u=rwx,g=rx,o=rx
+
+- name: "try to send a Desktopmessage"
+  become: true
+  shell: "/tmp/msg2desktop.sh -t {{ msg_title }} -m {{ msg_msg }} -d {{ msg_duration }}"
+#  ignore_errors: true
+  register: out
+
+- debug: var=out.stdout_lines
+
+- name: "remove msg2desktop.sh again"
+  file:
+    path: /tmp/msg2desktop.sh
+    state: absent
+
+
